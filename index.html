@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mrking Insurance Solutions — Protecting families today, securing legacies tomorrow.</title>
-<meta name="description" content="Personalized life insurance and annuity strategies for New Jersey families. Built around your goals — not a quota." />
+<meta name="description" content="Personalized life insurance and annuity strategies for families in New Jersey, Kansas, and Georgia. Built around your goals — not a quota." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -898,9 +898,216 @@ footer {
   .footer-grid { grid-template-columns: 1fr; }
   .top-bar .container { justify-content: center; text-align: center; }
   .top-bar a { margin-left: 0; margin-right: 16px; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-actions .btn { text-align: center; }
+/* =========== QUOTE MODAL =========== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 48, 31, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
 }
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  max-width: 560px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(22, 48, 31, 0.4);
+  border-top: 4px solid var(--cognac);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  padding: 32px 40px 20px;
+  border-bottom: 1px solid var(--border-warm);
+  position: relative;
+}
+
+.modal-header .eyebrow { display: block; margin-bottom: 8px; }
+
+.modal-header h2 {
+  font-size: 26px;
+  color: var(--forest-deep);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.modal-header h2 em { color: var(--cognac); font-style: italic; font-weight: 500; }
+
+.modal-header p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--slate);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: var(--cream-soft);
+  border: 1px solid var(--border-warm);
+  border-radius: 50%;
+  color: var(--forest-deep);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.modal-close:hover {
+  background: var(--cognac);
+  color: var(--forest-deep);
+  transform: rotate(90deg);
+}
+
+.modal-body { padding: 28px 40px 36px; }
+
+.form-group { margin-bottom: 20px; }
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--forest-deep);
+  margin-bottom: 8px;
+}
+
+.form-group label .required { color: var(--cognac-deep); }
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--charcoal);
+  background: var(--cream-soft);
+  border: 1.5px solid var(--border-warm);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--cognac);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(200, 166, 104, 0.15);
+}
+
+.form-textarea {
+  min-height: 96px;
+  resize: vertical;
+  font-family: var(--sans);
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3e%3cpath fill='%231F3D2E' d='M1 1l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-submit {
+  width: 100%;
+  padding: 16px;
+  font-size: 15px;
+  margin-top: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.form-footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 32px 20px;
+}
+
+.form-success.active { display: block; }
+
+.success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--forest-deep);
+  color: var(--cognac);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 36px;
+  border: 2px solid var(--cognac);
+}
+
+.form-success h3 {
+  font-size: 24px;
+  color: var(--forest-deep);
+  margin-bottom: 12px;
+}
+
+.form-success p {
+  font-size: 15px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.form-error {
+  display: none;
+  background: #FBF1F1;
+  border: 1px solid #E8C5C5;
+  color: #B71C1C;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.form-error.active { display: block; }
+
+@media (max-width: 560px) {
+  .modal-header { padding: 28px 24px 16px; }
+  .modal-body { padding: 24px 24px 32px; }
+  .modal-header h2 { font-size: 22px; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+}
+
+body.modal-open { overflow: hidden; }
 </style>
 </head>
 <body>
@@ -908,10 +1115,10 @@ footer {
 <!-- ========= TOP BAR ========= -->
 <div class="top-bar">
   <div class="container">
-    <div>Licensed in New Jersey · Independent advisor, multiple top-rated carriers</div>
+    <div>Licensed in NJ · KS · GA · Independent advisor, multiple top-rated carriers</div>
     <div>
       <a href="tel:+17605764889">📞 (760) 576-4889</a>
-      <a href="mailto:mrking06@yahoo.com">✉ mrking06@yahoo.com</a>
+      <a href="mailto:life@mrkinginsurance.com">✉ life@mrkinginsurance.com</a>
     </div>
   </div>
 </div>
@@ -945,9 +1152,9 @@ footer {
 
   <div class="container">
     <div class="hero-content">
-      <span class="eyebrow">Life Insurance · New Jersey</span>
+      <span class="eyebrow">Life Insurance · NJ · KS · GA</span>
       <h1>The legacy you build<em>deserves to outlive you.</em></h1>
-      <p class="lede">Personalized life insurance and annuity strategies for New Jersey families. Built around your goals — not a quota. Honest guidance from a licensed advisor who picks up the phone.</p>
+      <p class="lede">Personalized life insurance and annuity strategies for families across New Jersey, Kansas, and Georgia. Built around your goals — not a quota. Honest guidance from a licensed advisor who picks up the phone.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-primary btn-large">Get a Free Quote</a>
         <a href="#how" class="btn btn-outline btn-large">Book a 15-Min Call</a>
@@ -966,10 +1173,10 @@ footer {
 <div class="trust-strip">
   <div class="container trust-inner">
     <div class="trust-item">
-      <div class="trust-icon">NJ</div>
+      <div class="trust-icon">3</div>
       <div class="trust-text">
-        <strong>Licensed in NJ</strong>
-        <span>State-Authorized Producer</span>
+        <strong>Licensed in 3 States</strong>
+        <span>NJ · KS · GA</span>
       </div>
     </div>
     <div class="trust-item">
@@ -1107,7 +1314,7 @@ footer {
     <div class="about-grid">
       <div class="about-image">
         <div class="avatar">TR</div>
-        <h3>Thiruvarsan Rajakkannu</h3>
+        <h3>Thiruvarasan Rajakkannu</h3>
         <p class="role">Licensed Life Insurance Producer</p>
         <p class="tagline" style="color: var(--cream); opacity: 0.85; font-size: 14px;">"Every family I work with becomes my family for life."</p>
         <div class="stats">
@@ -1120,8 +1327,8 @@ footer {
             <span class="stat-label">Product Lines</span>
           </div>
           <div>
-            <span class="stat-num">NJ</span>
-            <span class="stat-label">State-Licensed</span>
+            <span class="stat-num">3</span>
+            <span class="stat-label">States Licensed</span>
           </div>
         </div>
       </div>
@@ -1129,10 +1336,10 @@ footer {
       <div class="about-content">
         <span class="eyebrow eyebrow-light">About Mrking</span>
         <h2 style="margin-top: 16px;">A practice built on<em>relationships, not quotas.</em></h2>
-        <p>Mrking Insurance Solutions exists for one reason: to give New Jersey families honest, plain-English guidance on the financial decisions that matter most.</p>
+        <p>Mrking Insurance Solutions exists for one reason: to give families across New Jersey, Kansas, and Georgia honest, plain-English guidance on the financial decisions that matter most.</p>
         <p>I'm an independent licensed producer — which means I work for you, not for a single carrier with sales targets to hit. When we sit down together, you get options from multiple top-rated companies, explained clearly, with the trade-offs spelled out.</p>
         <p>Insurance is a long relationship. The right policy today will sit in a drawer for thirty or forty years. I'm here for all of those years — to update beneficiaries, review coverage as your family grows, and pick up the phone when you have a question.</p>
-        <p class="signature">— Thiruvarsan</p>
+        <p class="signature">— Thiruvarasan</p>
       </div>
     </div>
   </div>
@@ -1143,7 +1350,7 @@ footer {
   <div class="container">
     <div class="section-header">
       <span class="eyebrow">What Families Say</span>
-      <h2>Real stories from<em>real New Jersey families.</em></h2>
+      <h2>Real stories from<em>real families.</em></h2>
     </div>
 
     <div class="testimonial-grid">
@@ -1191,7 +1398,7 @@ footer {
     <p>No pressure. No paperwork to start. Just a friendly conversation about what your family needs.</p>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
       <a href="tel:+17605764889" class="btn btn-primary btn-large">📞 Call (760) 576-4889</a>
-      <a href="mailto:mrking06@yahoo.com" class="btn btn-outline btn-large">✉ Email Thiru</a>
+      <a href="mailto:life@mrkinginsurance.com" class="btn btn-outline btn-large">✉ Email Thiru</a>
     </div>
   </div>
 </section>
@@ -1203,7 +1410,7 @@ footer {
       <div class="footer-brand">
         <span class="logo-mark">MRKING</span>
         <span class="logo-sub" style="display: block;">INSURANCE SOLUTIONS</span>
-        <p style="margin-top: 20px;">Personalized life insurance and annuity guidance for New Jersey families. Independent. Honest. Built for the long term.</p>
+        <p style="margin-top: 20px;">Personalized life insurance and annuity guidance for families across New Jersey, Kansas, and Georgia. Independent. Honest. Built for the long term.</p>
       </div>
 
       <div class="footer-col">
@@ -1235,11 +1442,11 @@ footer {
         </div>
         <div class="footer-contact-item">
           <strong>E</strong>
-          <a href="mailto:mrking06@yahoo.com" style="color: inherit;">mrking06@yahoo.com</a>
+          <a href="mailto:life@mrkinginsurance.com" style="color: inherit;">life@mrkinginsurance.com</a>
         </div>
         <div class="footer-contact-item">
           <strong>L</strong>
-          <span>Licensed in New Jersey</span>
+          <span>Licensed in NJ, KS & GA</span>
         </div>
       </div>
     </div>
@@ -1250,10 +1457,85 @@ footer {
     </div>
 
     <p class="disclosure">
-      Thiruvarsan Rajakkannu is a licensed life insurance producer in the State of New Jersey. NPN #XXXXXXX. This website is for informational purposes only and does not constitute an offer to sell or a solicitation to buy any insurance product. Product availability, features, and provisions may vary by state. Guarantees are based on the claims-paying ability of the issuing insurance company. Please consult a qualified tax or legal advisor regarding your specific situation.
+      Thiruvarasan Rajakkannu is a licensed life insurance producer in the States of New Jersey, Kansas, and Georgia. NPN #22154500. This website is for informational purposes only and does not constitute an offer to sell or a solicitation to buy any insurance product in any state in which the producer is not licensed. Product availability, features, and provisions may vary by state. Guarantees are based on the claims-paying ability of the issuing insurance company. Please consult a qualified tax or legal advisor regarding your specific situation.
     </p>
   </div>
 </footer>
+
+<!-- ========= QUOTE MODAL ========= -->
+<div class="modal-overlay" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal" role="document">
+    <button class="modal-close" id="modal-close" aria-label="Close form">×</button>
+
+    <div class="modal-header">
+      <span class="eyebrow">Free Quote · No Obligation</span>
+      <h2 id="modal-title">Let's find coverage that<em>fits your family.</em></h2>
+      <p>Fill in a few details and Thiru will personally reach out within 24 hours.</p>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-error" id="form-error">Something went wrong. Please try again, or email life@mrkinginsurance.com directly.</div>
+
+      <form id="quote-form" action="https://formspree.io/f/maqvvwkb" method="POST">
+        <!-- Formspree endpoint connected. To change later, edit the action URL above. -->
+
+        <div class="form-group">
+          <label for="f-name">Your Name <span class="required">*</span></label>
+          <input type="text" id="f-name" name="name" class="form-input" required placeholder="Jane Smith" autocomplete="name">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-email">Email <span class="required">*</span></label>
+            <input type="email" id="f-email" name="email" class="form-input" required placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="f-phone">Phone</label>
+            <input type="tel" id="f-phone" name="phone" class="form-input" placeholder="(201) 555-0100" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="f-product">Product of Interest <span class="required">*</span></label>
+          <select id="f-product" name="product" class="form-select" required>
+            <option value="">— Select a product —</option>
+            <option value="Term Life Insurance">Term Life Insurance</option>
+            <option value="Term with Simplified Issue">Term with Simplified Issue</option>
+            <option value="Guaranteed Universal Life (GUL)">Guaranteed Universal Life (GUL)</option>
+            <option value="Current Assumption UL">Current Assumption UL</option>
+            <option value="Indexed UL Accumulation">Indexed UL Accumulation</option>
+            <option value="Indexed UL Protection">Indexed UL Protection</option>
+            <option value="Annuities">Annuities</option>
+            <option value="Final Expense">Final Expense</option>
+            <option value="Living Benefits Rider">Living Benefits Rider</option>
+            <option value="Not sure — need guidance">Not sure — need guidance</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="f-message">Anything we should know? (Optional)</label>
+          <textarea id="f-message" name="message" class="form-textarea" placeholder="Your family situation, what's prompting the quote, best time to reach you, etc."></textarea>
+        </div>
+
+        <!-- Hidden honeypot field for spam protection -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <!-- Hidden field to customize email subject in your inbox -->
+        <input type="hidden" name="_subject" value="New Quote Request from mrkinginsurance.com">
+
+        <button type="submit" class="btn btn-primary form-submit" id="form-submit-btn">Request My Free Quote</button>
+
+        <p class="form-footer">Your information stays private. We'll never sell or share your details — this is between you and Thiru.</p>
+      </form>
+
+      <div class="form-success" id="form-success">
+        <div class="success-icon">✓</div>
+        <h3>Thank you!</h3>
+        <p>Your quote request has been sent. Thiru will personally reach out within 24 hours.<br><br>In the meantime, feel free to call <strong>(760) 576-4889</strong> if you need anything sooner.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   // Mobile menu toggle
@@ -1266,6 +1548,68 @@ footer {
     link.addEventListener('click', () => {
       document.getElementById('nav-menu').classList.remove('open');
     });
+  });
+
+  // ====== QUOTE MODAL LOGIC ======
+  const modal       = document.getElementById('quote-modal');
+  const modalClose  = document.getElementById('modal-close');
+  const form        = document.getElementById('quote-form');
+  const formError   = document.getElementById('form-error');
+  const formSuccess = document.getElementById('form-success');
+  const submitBtn   = document.getElementById('form-submit-btn');
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    modal.classList.add('active');
+    document.body.classList.add('modal-open');
+    // Reset state in case it was previously submitted
+    form.style.display = '';
+    formSuccess.classList.remove('active');
+    formError.classList.remove('active');
+    setTimeout(() => document.getElementById('f-name').focus(), 100);
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+  }
+
+  // Wire up every "Get a Quote" trigger on the page
+  document.querySelectorAll('[data-open-quote], a[href="#contact"]').forEach(el => {
+    el.addEventListener('click', openModal);
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+
+  // ====== FORM SUBMISSION ======
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    formError.classList.remove('active');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        formSuccess.classList.add('active');
+        form.reset();
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      formError.classList.add('active');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Request My Free Quote';
+    }
   });
 </script>
 
